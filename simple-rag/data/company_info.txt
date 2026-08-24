@@ -1,0 +1,6 @@
+Acme Corp was founded in 2021 by Jane Doe and John Smith. The company is headquartered in San Francisco, California.
+Our primary mission is to build highly-scalable AI tooling that enables engineers to ship agents faster.
+In 2023, Acme Corp launched its flagship product, AgentForge, which has over 10,000 active developers.
+The executive team consists of Jane Doe (CEO), John Smith (CTO), and Alice Johnson (VP of Product).
+For office support, you can contact support@acme-corp-example.com or visit our main office at 100 Market St, San Francisco.
+

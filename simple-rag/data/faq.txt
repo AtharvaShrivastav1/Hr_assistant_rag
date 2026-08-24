@@ -1,0 +1,8 @@
+What is AgentForge?
+AgentForge is an open-source framework for building, testing, and deploying autonomous AI agents. It includes pre-built connectors for various databases and LLM providers.
+
+How much does AgentForge cost?
+The core framework is completely open-source and free under the Apache 2.0 license. We also offer a hosted Cloud version with additional monitoring features starting at $20/month per user.
+
+Can I run AgentForge offline?
+Yes, AgentForge supports running offline using local embedding models and local LLM backends such as Ollama and Llama.cpp.

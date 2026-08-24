@@ -1,0 +1,28 @@
+# ACME CORP HR POLICIES & EMPLOYEE HELPLINE HANDBOOK
+
+## 1. HR Helpline & Contacts
+- **HR Support Email**: hr@acme-corp-example.com (Response within 24 hours)
+- **IT Service Desk**: call ext. 4357 (HELP) or email it-support@acme-corp-example.com
+- **Emergency Helpline**: call ext. 9111 (For workplace emergencies or security issues)
+- **Employee Assistance Program (EAP)**: call 1-800-555-ACME (Confidential 24/7 counseling and support)
+- **Office Location**: 100 Market St, San Francisco, CA 94105. Open Monday to Friday, 8:00 AM - 6:00 PM.
+
+## 2. Leave and Vacation Policy
+- **Paid Time Off (PTO)**: Full-time employees receive 20 days of accrued PTO per calendar year.
+- **Sick Leave**: Employees receive 10 days of fully paid sick leave annually.
+- **Parental Leave**: Acme Corp provides 16 weeks of fully paid parental leave for birth, adoption, or foster placement of a child.
+- **Requesting Leave**: All leave requests must be submitted through the Employee Portal (HRIS) at least two weeks in advance, except for unplanned sick leave, which should be reported by 9:00 AM on the day of absence to your manager.
+
+## 3. Employee Benefits & Healthcare
+- **Medical, Dental, & Vision**: Fully covered plans for employees, with 80% coverage for dependents. Plans start on the first day of the month following the hire date.
+- **Retirement (401k)**: Acme Corp matches 100% of employee contributions up to 4% of base salary. Matching funds vest immediately.
+- **Wellness Stipend**: Employees receive a $100/month stipend for gym memberships, wellness apps, or fitness equipment.
+
+## 4. Work Hours & Remote Work (Hybrid Policy)
+- **Core Collaboration Hours**: 10:00 AM to 3:00 PM PST. Employees are expected to be available for meetings during these hours.
+- **Hybrid Work**: Teams are expected to work from the office on Tuesdays and Thursdays. Mondays, Wednesdays, and Fridays are optional work-from-home days.
+- **Equipment Stipend**: New hires receive a one-time $500 home office equipment stipend.
+
+## 5. Payroll & Performance Reviews
+- **Payroll Schedule**: Semimonthly on the 15th and last day of the month.
+- **Performance Reviews**: Conducted twice a year, in June and December, focused on career development and goal alignment.

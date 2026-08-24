@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acme Corp HR Helpline</title>
+    <meta name="description" content="An interactive HR assistant and helpline console for Acme Corp employees.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="glow-bg"></div>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo-area">
+                <span class="logo-icon">✦</span>
+                <h1>Acme HR <span class="accent-text">Helpline</span></h1>
+            </div>
+            <div class="status-badge" id="system-status">
+                <span class="status-dot green"></span>
+                <span id="status-text">Connected</span>
+            </div>
+        </header>
+
+        <!-- Main Dashboard Layout -->
+        <main class="dashboard-grid">
+            <!-- Left Side: Ingestion, Document Manager, and Retrieval Details -->
+            <section class="control-panel glass-card">
+                <h2>Database Management</h2>
+                <p class="panel-desc">Manage your local knowledge base by ingesting text, markdown, or JSON files.</p>
+                
+                <div class="data-dir-section">
+                    <label for="data-directory-input">Data Directory Path</label>
+                    <div class="input-row">
+                        <input type="text" id="data-directory-input" value="./data" placeholder="e.g., ./data">
+                        <button id="btn-ingest" class="btn btn-secondary">
+                            <span class="btn-text">Ingest All</span>
+                            <span class="loader-spinner hidden" id="ingest-spinner"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <div class="stat-item">
+                        <span class="stat-label">Vector Store Status</span>
+                        <span class="stat-value" id="store-status">Checking...</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Ingested Chunks</span>
+                        <span class="stat-value" id="chunk-count">0</span>
+                    </div>
+                </div>
+
+                <!-- Document Manager -->
+                <div class="document-manager-section">
+                    <div class="section-header">
+                        <h3>Knowledge Documents</h3>
+                        <button id="btn-new-doc" class="btn-icon" title="Create New Document">✚ New</button>
+                    </div>
+                    <div id="document-list" class="document-list">
+                        <div class="empty-state">Loading documents...</div>
+                    </div>
+                </div>
+
+                <div class="context-retrieval-section">
+                    <h3>Retrieved Contexts</h3>
+                    <p class="panel-desc">The matching chunks from the vector database for your last query.</p>
+                    <div id="retrieved-contexts-list" class="contexts-list">
+                        <div class="empty-state">
+                            <p>No queries executed yet. Submit a query to see the retrieved documents.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Side: Query Console -->
+            <section class="query-panel glass-card">
+                <h2>HR & Helpline Assistant</h2>
+                <p class="panel-desc">Ask questions about policies, benefits, leave, IT support, or employee guidelines. The system will retrieve matching handbook segments and answer them.</p>
+
+                <!-- Suggested Queries -->
+                <div class="suggestions-container">
+                    <span class="suggestion-label">Suggested:</span>
+                    <div class="suggestion-pills" id="suggestion-pills">
+                        <button class="pill" data-query="What is the policy for parental leave?">Parental Leave</button>
+                        <button class="pill" data-query="How do I contact the IT desk and open a ticket?">IT Helpline</button>
+                        <button class="pill" data-query="What are the standard working hours and remote work policies?">Working Hours</button>
+                        <button class="pill" data-query="How are performance reviews conducted and what is the cycle?">Performance Reviews</button>
+                    </div>
+                </div>
+
+                <div class="query-input-area">
+                    <textarea id="query-textarea" placeholder="Type your HR or helpline question here... e.g. What is the policy for parental leave? or How do I contact the IT desk?" rows="3"></textarea>
+                    <div class="query-options">
+                        <div class="k-selector">
+                            <label for="top-k-select">Retrieve Chunks (Top K):</label>
+                            <select id="top-k-select">
+                                <option value="1">1 Chunk</option>
+                                <option value="3" selected>3 Chunks</option>
+                                <option value="5">5 Chunks</option>
+                            </select>
+                        </div>
+                        <button id="btn-submit-query" class="btn btn-primary">
+                            <span>Submit Query</span>
+                            <span class="loader-spinner hidden" id="query-spinner"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- TF-IDF Token Match Inspector -->
+                <div class="inspector-container hidden" id="tfidf-inspector-container">
+                    <h3>Query TF-IDF Token Inspector</h3>
+                    <p class="panel-desc">Matching tokens found in the corpus vocabulary and their associated TF-IDF importance weights.</p>
+                    <div class="token-matches-grid" id="token-matches-list">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <!-- Answer Output Area -->
+                <div class="answer-container">
+                    <div class="section-header">
+                        <h3>Generated Response</h3>
+                        <div class="actions">
+                            <button id="btn-export-chat" class="btn-text-action" title="Export current conversation log">⭳ Export Log</button>
+                            <button id="btn-clear-history" class="btn-text-action danger" title="Clear chat history">🗑 Clear History</button>
+                        </div>
+                    </div>
+                    <div id="answer-output" class="answer-box">
+                        <div class="empty-state">
+                            <p>Response will appear here...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat History Log -->
+                <div class="chat-history-section">
+                    <h3>Chat Session Log</h3>
+                    <div id="chat-history-list" class="chat-history-list">
+                        <div class="empty-state">No chat history in this session yet.</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Document Editor Modal -->
+    <div id="editor-modal" class="modal hidden">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h3 id="modal-title">Edit Document</h3>
+                <span class="close-btn" id="close-editor">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="doc-filename">File Path (relative to data dir)</label>
+                    <input type="text" id="doc-filename" placeholder="e.g., standard_working_hours.txt">
+                </div>
+                <div class="form-group">
+                    <label for="doc-content">Content</label>
+                    <textarea id="doc-content" rows="15" placeholder="Type document content here..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btn-cancel-edit" class="btn btn-secondary">Cancel</button>
+                <button id="btn-save-doc" class="btn btn-primary">
+                    <span>Save & Ingest</span>
+                    <span class="loader-spinner hidden" id="save-spinner"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
